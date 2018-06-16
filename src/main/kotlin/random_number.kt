@@ -8,7 +8,6 @@ import java.util.Random
 @Suppress("ClassName")
 class random_number : DefaultInternalAction() {
 
-    @Throws(Exception::class)
     override fun execute(ts: TransitionSystem?,
                          un: Unifier?,
                          args: Array<Term>?): Any {
@@ -17,6 +16,6 @@ class random_number : DefaultInternalAction() {
             val min = (args[1] as NumberTermImpl).solve().toInt()
             return un!!.unifies(args[2], NumberTermImpl((Random().nextInt(max) + min).toDouble()))
         }
-        throw Exception("arguments 0 and 1 must be numeric")
+        else return false
     }
 }
