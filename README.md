@@ -8,3 +8,12 @@ The project is the example of the domestic robot already implemented in Java by 
 Just clone the repository and open it with IntelliJ IDEA Ultimate or Community edition. If you are in a UNIX environment change the slashes orientation in the run configuration.
 
 If you want to open it using another IDE create a run configuration using `jason.infra.centralised.RunCentralisedMAS` as main class and `.\src\main\resources\config.mas2j` as argument (keep in mind slashes orientation if you are in a UNIX environment).
+
+## Contributing
+Library used:
+
+-  [Hübner, Bordini: JASON](http://jason.sourceforge.net/wp/)
+
+## Author
+
+* **Lamberto Basti**  - [lamba92](https://github.com/lamba92)
