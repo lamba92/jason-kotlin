@@ -18,11 +18,13 @@ last_order_id(1, 5).
 +!order(Product,Qtd)[source(Ag)] :
     available_beers(K) & K<Qtd
     <-
-        .print("Order qty: ", Qtd, " | Available qty: ", K, " | NOT ENOUGH BEER AVAILABLE SORRY").
+        .print("Order qty: ", Qtd, " | Available qty: ", K, " | NOT ENOUGH BEER AVAILABLE SORRY");
+        .send(Ag, tell, failed(Product,Qtd,OrderId)).
 
 +!start(_)[source(self)] :
     true
     <-
         project.random_number(15, 3, Quantity);
-        +available_beers(Quantity).
+        +available_beers(Quantity);
+        .print("Beer stock refurbished. Qty: ", Quantity).
 

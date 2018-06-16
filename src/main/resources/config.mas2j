@@ -18,7 +18,8 @@ MAS domestic_robot {
 
     agents: robot;
             owner;
-            supermarket agentArchClass project.SupermarketArch;
+            supermarket1 agentArchClass project.SupermarketArch;
+            supermarket2 agentArchClass project.SupermarketArch;
             
 	aslSourcePath: "src/main/resources/asl";
 }

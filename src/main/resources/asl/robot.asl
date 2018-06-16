@@ -4,7 +4,7 @@
 available(beer,fridge).
 
 // my owner should not consume more than 10 beers a day :-)
-limit(beer,10). 
+limit(beer,100). 
 
 /* Rules */ 
 
@@ -32,13 +32,21 @@ too_much(B) :-
 
 @h2
 +!has(owner,beer)
-   :  not available(beer,fridge)
+   :  not available(beer,fridge) & not order_failed(1)
    <-
         project.random_number(3, 1, N);
-        .send(supermarket, achieve, order(beer, N));
+        .send(supermarket1, achieve, order(beer, N));
         !at(robot,fridge). // go to fridge and wait there.
 
 @h3
++!has(owner,beer)
+   :  not available(beer,fridge) & order_failed(1)
+   <-
+        project.random_number(3, 1, N);
+        .send(supermarket2, achieve, order(beer, N));
+        !at(robot,fridge). // go to fridge and wait there.
+
+@h4
 +!has(owner,beer)
    :  too_much(beer) & limit(beer,L)    
    <- .concat("The Department of Health does not allow me ",
@@ -57,9 +65,20 @@ too_much(B) :-
 // when the supermarket makes a delivery, try the 'has' 
 // goal again   
 @a1
-+delivered(beer,Qtd,OrderId)[source(supermarket)] : true
++delivered(beer,Qtd,OrderId) : true
   <- +available(beer,fridge);
      !has(owner,beer). 
+
+@f1
++failed(Product,Qtd,OrderId) : not order_failed(1) 
+  <-  .send(supermarket2, achieve, order(Product, Qtd));
+      +order_failed(1).
+
+@f2
++failed(Product,Qtd,OrderId) : order_failed(1) & not order_failed(2) 
+  <-  .send(supermarket2, achieve, order(Product, Qtd));
+      +order_failed(2);
+      .print("NO SUPERMARKET HAS BEER AVAILABLE.").
 
 // when the fridge is opened, the beer stock is perceived
 // and thus the available belief is updated
