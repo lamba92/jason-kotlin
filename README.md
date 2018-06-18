@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lamba92/jason-kotlin.svg?branch=master)](https://travis-ci.org/lamba92/jason-kotlin)
+
 # A JASON AGENT KOTLIN PROJECT
 
 This project has been made for the exam of Intelligent Agents of University of Turin. This project include the configuration to run the JASON MAS using IntelliJ IDEA, Gradle with Kotlin DSL and Kotlin.
